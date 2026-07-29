@@ -1,7 +1,7 @@
 # Reference panel
 
 WGS of 48 individuals, of which 38 were used in the reference panel.
-SRA BioProject ID: PRJNA1501856.
+SRA  will be released upon publication.
 Vendor: Novogene
 Platform: NovaSeq X Plus (150 bp paired-end)
 Run ID: SUS20241101029-JF20241029
@@ -48,7 +48,7 @@ Duplicates were marked, not removed, with GATK MarkDuplicates.
 Deduplicated BAMs were assessed with `samtools flagstat` and mosdepth v0.3.6.
 
 ```bash
-gatk --java-options "-Xmx30g" MarkDuplicates \
+gatk --java-options "-Xmx28g" MarkDuplicates \
   -I "${IN_BAM}" \
   -O "${OUT_BAM}" \
   -M "${METRICS}" \
@@ -105,7 +105,7 @@ gatk --java-options "-Xmx70g -Djava.io.tmpdir=${TMPDIR}" GenomicsDBImport \
 Run across the 256 scattered intervals, one task per interval.
 
 ```bash
-gatk GenotypeGVCFs \
+gatk --java-options "-Xmx30g" GenotypeGVCFs \
   -R "${REF}" \
   -V "gendb://${WORKSPACE}" \
   -L "${INTERVAL_FILE}" \
