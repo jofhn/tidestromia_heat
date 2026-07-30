@@ -23,3 +23,11 @@ Raw reads and count matrices will be released at NCBI GEO upon publication.
 index and alignment, and assembly of the gene-by-sample count matrix.
 
 ## R-scripts
+
+`R/` holds one script per main-text figure panel. Input CSVs are in `R/data/`;
+scripts that fetch their data at runtime need no input file.
+
+`R/fig1a_range_map.R` — Fig. 1A. GBIF and iNaturalist occurrence records over
+WorldClim summer maximum temperature. Fetches all inputs; no data file.
+
+
