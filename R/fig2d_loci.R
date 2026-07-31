@@ -99,7 +99,7 @@ plots <- lapply(seq_len(nrow(loci)), function(i) {
 })
 
 for (i in seq_len(nrow(loci))) {
-  pdf(sprintf("fig2d_chr%d.pdf", loci$chrom[i]),
+  pdf(sprintf("fig2d_loci_chr%d.pdf", loci$chrom[i]),
       width = 4, height = 2.5, useDingbats = FALSE, bg = "transparent")
   print(plots[[i]])
   dev.off()

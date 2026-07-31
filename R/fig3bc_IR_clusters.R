@@ -1,5 +1,5 @@
 # Figure 3B-C — leaf temperature depression by cluster at 60 °C
-# Inputs: data/fig3abc_tidy_temps.csv          (cell metadata, clusters)
+# Inputs: data/fig3abcd_tidy_temps.csv          (cell metadata, clusters)
 #         data/fig3bcd_radiuses_leaves_combined_all.csv    (IR camera leaf temperatures)
 #         data/fig3bc_hobo.csv (chamber air T, RH, light)
 
@@ -18,7 +18,7 @@ TZ          <- "America/Los_Angeles"
 pal <- c("1" = "#E63946", "2" = "#F4A261", "3" = "#457B9D")
 
 # --- leaf temperatures -------------------------------------------------------
-meta <- read.csv("data/fig3abc_tidy_temps.csv")[-1] %>%
+meta <- read.csv("data/fig3abcd_tidy_temps.csv")[-1] %>%
   select(id, cluster, tray, row, col, cell, si, site, individual,
          family, where, time_to_four)
 

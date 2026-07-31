@@ -1,5 +1,5 @@
 # Figure 5A — leaf temperature depression across air temperatures, by cluster
-# Inputs: data/fig3abc_tidy_temps.csv
+# Inputs: data/fig3abcd_tidy_temps.csv
 #         data/fig3bcd_radiuses_leaves_combined_all.csv
 #         data/fig3bc_hobo.csv
 
@@ -19,7 +19,7 @@ DAY_LABELS <- c("1" = "51°C", "2" = "55°C", "3" = "60°C")
 pal <- c("1" = "#E63946", "2" = "#F4A261", "3" = "#457B9D")
 
 # --- data (as in fig3bc_IR_clusters.R) ---------------------------------------
-meta <- read.csv("data/fig3abc_tidy_temps.csv")[-1] %>%
+meta <- read.csv("data/fig3abcd_tidy_temps.csv")[-1] %>%
   select(id, cluster, cell)
 
 ir <- read.csv("data/fig3bcd_radiuses_leaves_combined_all.csv") %>%

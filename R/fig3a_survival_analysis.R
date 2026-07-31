@@ -1,5 +1,5 @@
 # Figure 3A — survival by thermal cluster
-# Input: data/fig3abc_tidy_temps.csv (cluster assignments, fustat, time_to_four)
+# Input: data/fig3abcd_tidy_temps.csv (cluster assignments, fustat, time_to_four)
 
 library(dplyr)
 library(survival)
@@ -8,7 +8,7 @@ library(ggplot2)
 
 pal <- c("#E63946", "#F4A261", "#457B9D")
 
-d <- read.csv("data/fig3abc_tidy_temps.csv")[-1]
+d <- read.csv("data/fig3abcd_tidy_temps.csv")[-1]
 
 # k-means labels are arbitrary; reorder so cluster 1 is the fastest to die
 d$cluster <- factor(d$cluster, levels = c("1", "3", "2"), labels = c("1", "2", "3"))

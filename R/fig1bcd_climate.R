@@ -1,5 +1,6 @@
 # Figure 1B-D — collection sites and ERA5 summer climate by region
-# Input: data/era5_land_temperature_2m.csv
+# Inputs: data/collection_regions.csv
+#         data/era5_land_temperature_2m.csv  (436 MB; in Zenodo deposit or regenerate with R/fetch_era_land5.R)
 
 library(dplyr)
 library(ggplot2)
@@ -17,9 +18,10 @@ pal <- c(DV = "#EE6677", perimeter = "#4477AA", outside = "#228833")
 regions <- c("DV", "perimeter", "outside")
 
 # --- data --------------------------------------------------------------------
-csv <- "data/era5_land_temperature_2m.csv"
+csv <- "data/climates/era5_land_temperature_2m.csv"
 if (!file.exists(csv)) {
-  stop("Missing ", csv, " — generate it with R/era5_fetch.R")
+  stop("Missing ", csv, " — download it from the Zenodo deposit, or regenerate ",
+       "it with R/fetch_era_land5.R")
 }
 
 weather <- read.csv(csv) %>%

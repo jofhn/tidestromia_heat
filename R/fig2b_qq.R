@@ -1,15 +1,12 @@
 # Figure 2B — QQ plot of the DV/Perimeter association test
 # Inputs: data/DVP_imputed_sorted_100kb_speciesrange_ne.prune.prune.in
-#         glm_tt4_imputed_dvp_allchr_pc1-25_100kb_speciesrange_ne.tsv (1.4 GB, not deposited; regenerate per wgs/survival_panel.md, section 13)
-#
-# Association results are from PLINK 2 (see wgs/survival_panel.md, section 13).
+#         glm_dvp_full.tsv.gz  (1.4 GB uncompressed; in the Zenodo deposit; see section 13 in wgs/survival_panel.md)
 
 library(data.table)
 library(ggplot2)
 
 # --- data --------------------------------------------------------------------
-glm <- fread("/mnt/gs21/scratch/feehanj1/analysis/25363Srh/imputation/glm/dvp/glm_tt4_imputed_dvp_allchr_pc1-25_100kb_speciesrange_ne.tsv",
-             select = "P")
+glm <- fread("data/glm_tt4_imputed_dvp_allchr_pc1-25_100kb_speciesrange_ne.tsv")
 
 # variants with NA P failed the VIF check and are dropped
 p <- glm$P

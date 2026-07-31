@@ -128,6 +128,6 @@ p <- ggplot(sweep_df, aes(x = g_vapor)) +
     plot.background   = element_rect(fill = "transparent", color = NA)
   )
 
-pdf("fig5b_energy_budget.pdf", width = 3.6, height = 2.75,
+pdf("fig5b_energy_balance.pdf", width = 3.6, height = 2.75,
     useDingbats = FALSE, bg = "transparent")
 print(p); dev.off()

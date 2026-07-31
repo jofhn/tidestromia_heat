@@ -7,7 +7,6 @@
 library(dplyr)
 library(ggplot2)
 library(lmerTest)
-library(multcompView)
 
 TARGET_DATE <- "2024-10-29"     # 60 °C day
 WIN_LO <- 945
@@ -23,7 +22,7 @@ plants <- read.csv("data/fig3e_tidy_temps.csv")[-1] %>%
   mutate(id = as.character(id), fustat = 0L)     # survivors
 
 soils <- read.csv("data/fig3e_tidy_counts_soils.csv")[-1] %>%
-  select(id, cell, tray, row, col, individual)  %>%
+  select(id, cell, tray, row, col, individual) %>%
   mutate(id = as.character(id), fustat = 1L)     # substrate
 
 cells <- bind_rows(plants, soils)
@@ -136,14 +135,6 @@ s <- w %>%
   group_by(cell, grp) %>%
   summarise(min = min(deltaT, na.rm = TRUE),
             max = max(deltaT, na.rm = TRUE), .groups = "drop")
-
-letters_df <- lapply(c("min", "max"), function(stat) {
-  fit <- aov(as.formula(paste(stat, "~ grp")), data = s)
-  pv  <- TukeyHSD(fit)[[1]][, "p adj"]
-  names(pv) <- rownames(TukeyHSD(fit)[[1]])
-  L <- multcompLetters(pv)$Letters
-  data.frame(grp = names(L), Letters = unname(L), stat = stat)
-}) %>% bind_rows()
 
 long <- bind_rows(
   data.frame(grp = s$grp, value = s$min, stat = "min"),

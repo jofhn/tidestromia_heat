@@ -1,5 +1,6 @@
-# Figure 1G — survival health status scores through the lethal heat trial
-# Input: data/fig1g_survival_health_status_scores.csv (row, col, then one column per day d7-d29; scores 0-4, "-" = missing)
+# Figure 1G — health status scores through the lethal heat trial
+# Input: data/fig1g_survival_health_status_scores.csv
+#        (row, col, then one column per day d7-d29; scores 0-4, "-" = missing)
 
 library(dplyr)
 library(tidyr)
@@ -9,18 +10,31 @@ library(grid)
 score_labels <- c("0" = "healthy", "1" = "burnt", "2" = "sick",
                   "3" = "very_sick", "4" = "dead")
 
-day_levels <- paste0("d", 8:29)
+day_cols   <- paste0("d", 7:29)     # chronological order, not file order
+day_levels <- paste0("d", 8:29)     # plotted range; day 7 is pre-treatment
 
 # --- data --------------------------------------------------------------------
-# Score 0-4 per plant per day; missing values excluded. Counts are normalised
-# within each day so bars sum to 1. Day 7 is dropped (pre-treatment).
-combined <- read.csv("data/fig1g_survival_health_status_scores.csv") %>%
-  pivot_longer(-c(row, col), names_to = "day", values_to = "score",
-               values_transform = list(score = as.character)) %>%
-  filter(score %in% names(score_labels)) %>%
+raw <- read.csv("data/fig1g_survival_health_status_scores.csv", colClasses = "character")
+
+# A missing score flanked by 0 on the preceding and following day is a scoring
+# gap rather than a missing plant, and is filled as 0.
+m <- as.matrix(raw[, day_cols])
+for (j in 2:(ncol(m) - 1)) {
+  gap <- m[, j] == "-" & m[, j - 1] == "0" & m[, j + 1] == "0"
+  m[gap, j] <- "0"
+}
+raw[, day_cols] <- m
+
+# Plants still carrying a missing score on any scored day are excluded outright,
+# so daily totals are constant. Counts are normalised within each day.
+combined <- raw %>%
+  pivot_longer(-c(row, col), names_to = "day", values_to = "score") %>%
+  filter(day %in% day_levels) %>%
+  group_by(row, col) %>%
+  filter(all(score %in% names(score_labels))) %>%
+  ungroup() %>%
   mutate(survivability = score_labels[score]) %>%
   count(day, survivability, name = "sums") %>%
-  filter(day %in% day_levels) %>%
   group_by(day) %>%
   mutate(normsums = sums / sum(sums)) %>%
   ungroup() %>%
@@ -82,6 +96,6 @@ draw_plot <- function() {
             rot = 90, gp = gpar(fontfamily = "Helvetica", fontsize = 12))
 }
 
-pdf("fig1g_survival_health_status_scores.pdf", width = 4.75, height = 2.5, useDingbats = FALSE, bg = "transparent")
+pdf("fig1g_survival_plot.pdf", width = 4.75, height = 2.5, useDingbats = FALSE, bg = "transparent")
 draw_plot()
 dev.off()

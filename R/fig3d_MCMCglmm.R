@@ -1,8 +1,9 @@
 # Figure 3D — predictors of death at 60 °C
 # Inputs: data/fig3d_tidy_counts.csv                     (scores, survival status)
-#         data/fig3bcd_radiuses_leaves_combined_all.csv    (IR camera leaf temperatures)
 #         data/fig3d_leaf_measurements_d16.csv           (leaf area, shape)
 #         data/fig3d_leaf_greenness.csv                  (green ratio)
+#         data/fig3bcd_radiuses_leaves_combined_all.csv    (IR camera leaf temperatures)
+
 
 library(dplyr)
 library(ggplot2)

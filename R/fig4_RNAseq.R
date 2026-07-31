@@ -2,7 +2,7 @@
 # Inputs: data/fig4_star_gene_counts_unstranded.tsv   (gene x sample counts)
 #         data/fig4_RNAseq_hotcold_plan.csv           (sample metadata)
 #         data/fig4_gene_families_annotation.xlsx     (GO terms, Arabidopsis orthologs)
-#         data/fig4_dvp_candidates.tsv                     (GWAS candidate genes per locus)
+#         data/dvp_candidates.tsv                     (GWAS candidate genes per locus)
 #
 # Counts are from STAR --quantMode GeneCounts (see rnaseq/hotcold.md).
 
@@ -496,7 +496,7 @@ pdf("figS12c_euler.pdf", width = 4, height = 4,
 print(p_euler); dev.off()
 
 # --- S12D and S12E: GWAS candidate genes that are also DE --------------------
-dvp_cands <- fread("data/fig4_dvp_candidates.tsv")
+dvp_cands <- fread("data/candidate_genes.tsv")
 
 LOCI <- c(Chr1 = "1:84178924:C:T",
           Chr2 = "2:178968191:A:G",

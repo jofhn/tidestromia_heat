@@ -59,7 +59,7 @@ d <- d[abs(as.numeric(difftime(d$hobo_time, d$cam_time, units = "mins"))) <= 3, 
 window_mean <- function(date, lo, hi) {
   x <- subset(hobo, as.Date(hobo_time) == as.Date(date))
   h <- as.numeric(format(x$hobo_time, "%H")) +
-       as.numeric(format(x$hobo_time, "%M")) / 60
+    as.numeric(format(x$hobo_time, "%M")) / 60
   mean(x$tempC[h >= lo & h < hi], na.rm = TRUE)
 }
 

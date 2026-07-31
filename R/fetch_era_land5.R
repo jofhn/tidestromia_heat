@@ -1,14 +1,11 @@
 # ERA5-Land hourly summer temperature for the collection sites
 #
 # Queries the Open-Meteo historical archive API (models = era5_land) for 2 m air
-# temperature at each collection site, June-August, 1950-2024. Writes the table
-# read by R/fig1bcd_climate.R.
+# temperature at each collection site, June-August, 1950-2024. 
+# Writes the table read by R/fig1bcd_climate.R.
 #
-# Input:  data/collection_regions.csv  (site, family, where, lat, long)
-# Output: data/era5_land_temperature_2m.csv
-#
-# The full output is ~500 MB and is not deposited. Requests are rate-limited, so
-# a full run takes several hours.
+# Input:  data/collection_temps_coords.csv  (site, family, where, lat, long)
+# Output: data/era5_land_temperature_2m.csv (~436 MB; in Zenodo deposit)
 
 library(dplyr)
 library(httr)
@@ -62,7 +59,6 @@ fetch_site <- function(site, family, where, lat, long) {
 
 # --- run ---------------------------------------------------------------------
 coords <- na.omit(read.csv(coords_csv))
-stopifnot(all(c("site", "family", "where", "lat", "long") %in% names(coords)))
 
 weather <- lapply(seq_len(nrow(coords)), function(i) {
   message("Fetching site ", coords$site[i], " (", i, " of ", nrow(coords), ")")
