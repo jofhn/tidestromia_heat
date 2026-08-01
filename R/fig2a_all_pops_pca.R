@@ -70,7 +70,7 @@ p_region <- ggplot(pca_df, aes(PCX, PCY, color = region)) +
   labs(x = xl, y = yl) +
   pca_theme
 
-pdf("fig2a_pca_region.pdf", width = 2.75, height = 2.75, useDingbats = FALSE)
+pdf("fig2a_all_pops_pca_region.pdf", width = 2.75, height = 2.75, useDingbats = FALSE)
 print(p_region)
 dev.off()
 
@@ -92,6 +92,6 @@ p_group <- ggplot(pca_df, aes(PCX, PCY, color = group)) +
   pca_theme +
   theme(legend.key.spacing.y = unit(-5, "pt"))
 
-pdf("fig2a_pca_group.pdf", width = 2.75, height = 2.75, useDingbats = FALSE)
+pdf("fig2a_all_pops_pca_group.pdf", width = 2.75, height = 2.75, useDingbats = FALSE)
 print(p_group)
 dev.off()
